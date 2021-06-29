@@ -11,7 +11,7 @@ pipeline{
         stage('Build') {
             steps {
                 echo 'Building..'
-                dir('/var/lib/jenkins/workspace/test/java-tomcat-sample') {
+                dir('/var/lib/jenkins/workspace/new_project/java-tomcat-sample') {
                     sh "pwd"
                     sh 'mvn clean install'
                 }
