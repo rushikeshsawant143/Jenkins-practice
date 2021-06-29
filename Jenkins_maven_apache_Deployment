@@ -1,0 +1,53 @@
+pipeline{
+    agent any
+    tools {
+        maven 'maven_local'
+    }
+    parameters {
+        text defaultValue: 'myVal', description: 'Enter Parameter value?', name: 'myParameter'
+    }
+
+    stages {
+        stage('Git_Cloning') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'a4342aad-51ff-4f81-be3e-b0ab5a196479', url: 'https://github.com/rushikeshsawant143/Jenkins-practice.git']]])
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                dir('/var/lib/jenkins/workspace/test/java-tomcat-sample') {
+                    sh "pwd"
+                    sh 'mvn clean install'
+                }
+                
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying..'
+                deploy adapters: [tomcat9(credentialsId: '01d8b105-aab4-4f99-b879-f2959447adac', path: '', url: 'http://172.31.87.153:8080/')], contextPath: 'java-tomcat-jenkinsfile-sample', war: '**/*.war'
+
+            }
+        }
+    }
+    
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+        }
+    }
+
+
+
+
+
+}
