@@ -8,11 +8,6 @@ pipeline{
     }
 
     stages {
-        stage('Git_Cloning') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'a4342aad-51ff-4f81-be3e-b0ab5a196479', url: 'https://github.com/rushikeshsawant143/Jenkins-practice.git']]])
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Building..'
