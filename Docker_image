@@ -1,0 +1,55 @@
+pipeline{
+    agent any
+    tools {
+        maven 'maven_local'
+    }
+    
+    stages {
+        stage('git_clonning') {
+            steps {
+                git branch: 'main', credentialsId: 'd806d3c7-795b-4c31-89b0-9ecb6d2babfd', url: 'https://github.com/rushikeshsawant143/Jenkins-practice.git'
+            }
+        }
+
+        stage('build') {
+            steps {
+                echo 'Building..'
+                dir('/var/lib/jenkins/workspace/test/java-tomcat-sample') {
+                    sh "pwd"
+                    sh 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Docker_image') {
+            steps {
+                sh 'pwd'
+                sh 'docker build -t docker-apache2 .'
+            }
+        }
+
+        stage('docker_push_to _ECR') {
+            steps {
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng'
+                sh 'docker tag docker-apache2:latest 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng:latest'
+            }
+        }
+
+        stage('docker_push_') {
+            steps {
+                sh 'docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng'
+            }
+        }
+    }
+}
+
+
+
+// error occured
+//+ docker build -t docker-apache2 .
+//Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post 
+
+//solution
+//usermod -aG docker jenkins
+//usermod -aG root jenkins
+//chmod 777 /var/run/docker.sock
