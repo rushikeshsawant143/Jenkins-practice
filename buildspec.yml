@@ -9,16 +9,16 @@ phases:
       - echo Nothing to do in the pre_build phase.
       - yum install docker -y
       - usermod -a -G docker root
-#       - cd java-tomcat-sample
-#       - mvn install
-#       - aws ecr create-repository --repository-name docker-testing --region us-east-1
-#       - docker tag docker-test 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
-#       - aws ecr get-login-password | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com
+      - cd java-tomcat-sample
+      - mvn install
+      - aws ecr create-repository --repository-name docker-testing --region us-east-1
+      - docker tag docker-test 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
+      - aws ecr get-login-password | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com
       
   build:
     commands:
       - echo Build started on `date`
-#       - docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
+      - docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
 
 
   post_build:
