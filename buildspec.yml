@@ -8,7 +8,7 @@ phases:
     commands:
       - echo Nothing to do in the pre_build phase.
       - yum install docker -y
-      - sudo usermod -a -G docker root
+      - usermod -a -G docker root
 #       - cd java-tomcat-sample
 #       - mvn install
 #       - aws ecr create-repository --repository-name docker-testing --region us-east-1
