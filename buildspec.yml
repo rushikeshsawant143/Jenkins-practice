@@ -10,7 +10,7 @@ phases:
       - cd java-tomcat-sample
       - mvn install
       - id
-      - sudo usermod -a -G docker root
+      - usermod -a -G docker root
       - aws ecr create-repository --repository-name docker-testing --region us-east-1
       - docker tag docker-test 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
       - aws ecr get-login-password | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com
