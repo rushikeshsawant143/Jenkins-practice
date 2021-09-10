@@ -7,14 +7,14 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase.
-      - yum install docker -y
-      - usermod -a -G docker root
+#       - yum install docker -y
+#       - usermod -a -G docker root
       - cd java-tomcat-sample
       - mvn install
       - cd ..
       - docker build -t docker-apache2 .
       - aws ecr create-repository --repository-name docker-testing --region us-east-1
-#       - docker tag docker-test 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
+      - docker tag docker-test 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
       - aws ecr get-login-password | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com
       
 #   build:
