@@ -11,7 +11,8 @@ phases:
     commands:
       - echo Build started on `date`
       - ls
-#       - mvn install
+      - cd java-tomcat-sample
+      - mvn install
   post_build:
     commands:
       - echo Build completed on `date`
