@@ -6,11 +6,11 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase..
-      - service docker start
+      - echo Nothing to do in the pre_build phase.
   build:
     commands:
       - echo Build started on `date`
+      - service docker status
       - ls
       - cd java-tomcat-sample
       - mvn install
