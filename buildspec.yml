@@ -17,7 +17,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
+      - cat /etc/group | grep docker
+#       - docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
 
 
   post_build:
