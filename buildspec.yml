@@ -7,6 +7,8 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
+      - sudo amazon-linux-extras install docker -y
+      - sudo service docker start
   build:
     commands:
       - echo Build started on `date`
