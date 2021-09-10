@@ -7,12 +7,16 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase.
+      - cd java-tomcat-sample
+      - mvn install
+      - $(aws ecr create-repository --repository-name docker-testing --region us-east-1)
+#       - $(docker tag docker-test ACCOUNT-ID.dkr.ecr.us-east-1.amazonaws.com/docker-testing)
+      
   build:
     commands:
       - echo Build started on `date`
       - ls
-      - cd java-tomcat-sample
-      - mvn install
+
 
   post_build:
     commands:
