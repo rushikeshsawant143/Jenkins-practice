@@ -24,6 +24,7 @@ pipeline{
 
         stage('docker_push_to _ECR') {
             steps {
+                sh 'aws ecr create-repository --repository-name docker-testing --region us-east-1'
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng'
                 sh 'docker tag docker-apache2 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng'
             }
