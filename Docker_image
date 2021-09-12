@@ -31,7 +31,7 @@ pipeline{
 
         stage('docker_push_') {
             steps {
-                sh 'docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testng'
+                sh 'docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing'
             }
         }
     }
