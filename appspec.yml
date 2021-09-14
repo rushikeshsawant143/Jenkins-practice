@@ -3,7 +3,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: /
+  - source: /java-tomcat-sample\target
    destination: /usr/local/tomcat/webapps/
 
 # hooks:
