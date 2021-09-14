@@ -4,7 +4,7 @@ os: linux
 
 files:
   - source: /java-tomcat-sample\target
-   destination: /usr/local/tomcat/webapps/
+   destination: /opt/apache-tomcat-9.0.35/webapps
 
 # hooks:
 #   ApplicationStop:
