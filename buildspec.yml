@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Nothing to do in the pre_build phase.
       - cd java-tomcat-sample
-      - mvn install
+      - mvn clean install
       - cd ..
       - ls
 #       - docker build -t docker-apache2 .
