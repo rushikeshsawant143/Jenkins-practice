@@ -8,6 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase.
+      - cd java-tomcat-sample
       - mvn clean install
       - ls
       - pwd
