@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    env_name: "$1"
+
 phases:
   install:
     runtime-versions:
@@ -8,6 +12,13 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase.
+      - chmod 777 launch_template.sh
+      - bash launch_template.sh $env_name
+
+      
+  build:
+    commands:
+      - echo Build started on `date`
       - cd java-tomcat-sample
       - mvn clean install
       - ls
@@ -16,10 +27,6 @@ phases:
 #       - aws ecr create-repository --repository-name docker-testing --region us-east-1
 #       - docker tag docker-apache2 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
 #       - aws ecr get-login-password | docker login --username AWS --password-stdin 067663653687.dkr.ecr.us-east-1.amazonaws.com
-      
-  build:
-    commands:
-      - echo Build started on `date`
 #       - docker push 067663653687.dkr.ecr.us-east-1.amazonaws.com/docker-testing
 
 
